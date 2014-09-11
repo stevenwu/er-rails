@@ -57,5 +57,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, except: [:new, :edit]
+    get :csrf, to: 'csrf#index'
   end
 end
