@@ -29,6 +29,7 @@ gem 'active_model_serializers'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0.0'
 end
 
 group :production do
