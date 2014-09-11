@@ -32,6 +32,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 end
 
+group :test do
+  gem 'database_rewinder'
+end
+
 group :production do
   gem 'pg'
 end
