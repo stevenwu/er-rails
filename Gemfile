@@ -30,10 +30,9 @@ gem 'active_model_serializers'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.0.0'
-end
-
-group :test do
   gem 'database_rewinder'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :production do

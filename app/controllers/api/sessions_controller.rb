@@ -5,8 +5,6 @@ class Api::SessionsController < ApplicationController
     user = user_from_credentials
     return invalid_credentials unless user
 
-    user.ensure_authentication_token!
-
     data = {
       user_id: user.id,
       auth_token: user.authentication_token
@@ -16,6 +14,14 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
+    return missing_params unless params[:auth_token]
+
+    user = User.find_by authentication_token: params[:auth_token]
+    return invalid_credentials unless user
+
+    user.reset_authentication_token!
+
+    render json: { user_id: user.id, status: :ok }
   end
 
   private

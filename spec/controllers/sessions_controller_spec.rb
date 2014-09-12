@@ -34,5 +34,28 @@ describe Api::SessionsController do
   end
 
   describe 'DELETE destroy' do
+    context 'with no params' do
+      before { delete :destroy }
+
+      it 'returns :bad_request' do
+        expect(response.response_code).to eq(400)
+      end
+    end
+
+    context 'with wrong credentials' do
+      before { delete :destroy, auth_token: '' }
+
+      it 'returns :unauthorized' do
+        expect(response.response_code).to eq(401)
+      end
+    end
+
+    context 'with correct credentials' do
+      before { delete :destroy, auth_token: user.authentication_token }
+
+      it 'returns :ok' do
+        expect(response.response_code).to eq(200)
+      end
+    end
   end
 end

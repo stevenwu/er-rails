@@ -56,7 +56,13 @@ Rails.application.routes.draw do
   #   end
 
   namespace :api do
-    resources :users, except: [:new, :edit]
+    # resources :users, except: [:new, :edit]
+    devise_for :users, only: []
+
+    devise_scope :user do
+      post 'sign_in' => 'sessions#create'
+      delete 'sign_out' => 'sessions#destroy'
+    end
     get :csrf, to: 'csrf#index'
   end
 end
