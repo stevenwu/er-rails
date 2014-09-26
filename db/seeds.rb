@@ -8,4 +8,5 @@
 
 User.create(email: 'jimi@gmail.com', password: 'password')
 User.create(email: 'jimmy@gmail.com', password: 'password')
+User.create(email: 'admin@gmail.com', password: 'password', role: :admin)
 

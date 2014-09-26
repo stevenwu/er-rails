@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  enum role: [ :admin, :user, :premium ]
+  enum role: [ :user, :premium, :admin ]
   before_save :ensure_authentication_token
+  after_initialize :set_default_role, if: :new_record?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -18,6 +19,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def set_default_role
+    self.role ||= :user
+  end
 
   def generate_authentication_token
     loop do
