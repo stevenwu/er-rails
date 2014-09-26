@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -58,6 +57,8 @@ Rails.application.routes.draw do
   namespace :api do
     # resources :users, except: [:new, :edit]
     devise_for :users, only: []
+
+    resources :users
 
     devise_scope :user do
       post 'sign_in' => 'sessions#create'
