@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  enum role: [ :admin, :user, :premium ]
   before_save :ensure_authentication_token
 
   # Include default devise modules. Others available are:
