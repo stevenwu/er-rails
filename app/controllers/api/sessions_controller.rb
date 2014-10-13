@@ -7,6 +7,7 @@ class Api::SessionsController < ApplicationController
 
     data = {
       user_id: user.id,
+      user: user,
       auth_token: user.authentication_token
     }
 
