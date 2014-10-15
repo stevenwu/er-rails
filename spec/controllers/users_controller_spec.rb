@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Api::UsersController do
   let(:user) { Fabricate(:user) }
+
   describe 'GET index' do
     before { get :index }
 
@@ -37,5 +38,13 @@ describe Api::UsersController do
         expect(response.response_code).to eq(200)
       end
     end
+  end
+
+  it 'will send welcome email on user sign up' do
+    user = Fabricate.build(:user)
+
+    expect do
+      post :create, user: { email: user.email, password: user.password, password_confirmation: user.password, auth_token: user.authentication_token }
+    end.to change{ActionMailer::Base.deliveries.size}.by(1)
   end
 end

@@ -8,6 +8,8 @@ class Api::UsersController < ApplicationController
 
     if user.save
       render json: user, status: :created
+
+      UserMailer.welcome_user(user).deliver
     else
       render json: user.errors, status: :unprocessable_entity
     end
