@@ -38,6 +38,16 @@ describe Api::UsersController do
         expect(response.response_code).to eq(200)
       end
     end
+
+    context 'can change passwords' do
+      before do
+        put :update_password, user: { reset_password_token: user.reset_password_token, password: 'new_pass', password_confirmation: 'new_pass'}
+      end
+
+      it 'returns :ok' do
+        expect(response.response_code).to eq(200)
+      end
+    end
   end
 
   it 'will send welcome email on user sign up' do

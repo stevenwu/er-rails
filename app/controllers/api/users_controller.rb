@@ -29,10 +29,20 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update_password
+    user = User.find_by(reset_password_token: user_params[:reset_password_token])
+    if user
+      user.update(reset_password_token: nil, password: user_params[:password])
+      render json: user, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :reset_password_token, :password, :password_confirmation)
   end
 
   def current_user

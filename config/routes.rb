@@ -58,7 +58,10 @@ Rails.application.routes.draw do
     # resources :users, except: [:new, :edit]
     devise_for :users, only: []
 
+    put '/users/update_password' => 'users#update_password'
     resources :users
+
+    resources :password_reset, only: [:create]
 
     devise_scope :user do
       post 'sign_in' => 'sessions#create'
